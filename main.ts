@@ -1,6 +1,9 @@
 namespace SpriteKind {
     export const player_attack = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`light2`, function (sprite, location) {
+    load_area(1)
+})
 // i honestly don't know why i made these numbers, string would be much easier to understand
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     nail_direction = 2
@@ -21,6 +24,13 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(100)
     gravitycheck()
 })
+// Freezes here. Don't know why.
+function load_area (num: number) {
+    tiles.setCurrentTilemap(Area_list[num])
+    tiles.placeOnTile(theKnight, tiles.getTileLocation(0, 0))
+    pause(100)
+    gravitycheck()
+}
 // Nail slash.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     player_NailSlash = sprites.create(assets.image`nail_hitbox`, SpriteKind.player_attack)
@@ -177,6 +187,7 @@ let FX: Sprite = null
 let vengefulspirit: Sprite = null
 let player_NailSlash: Sprite = null
 let nail_direction = 0
+let Area_list: tiles.TileMapData[] = []
 let theKnight: Sprite = null
 tiles.setCurrentTilemap(tilemap`kingspass`)
 let area = 0
@@ -187,14 +198,14 @@ tiles.placeOnTile(theKnight, tiles.getTileLocation(1, 1))
 controller.moveSprite(theKnight, 100, 0)
 game.showLongText("Higher beings, these words are for you alone.", DialogLayout.Top)
 game.showLongText("Press B to ascend to greater heights.", DialogLayout.Top)
-let Area_list = [
-"kings pass",
-"dirtmouth",
-"forgotten crossroads",
-"greenpath",
-"crystal peak",
-"kingdom's edge",
-"white palace"
+Area_list = [
+tilemap`kingspass`,
+tilemap`dirtmouth1`,
+tilemap`dirtmouth1`,
+tilemap`dirtmouth1`,
+tilemap`dirtmouth1`,
+tilemap`dirtmouth1`,
+tilemap`dirtmouth1`
 ]
 gravitycheck()
 // Blackout crash on any attempt to move "gravitycheck" function into here. No known workarounds. Unclear why this happens.
