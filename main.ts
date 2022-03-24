@@ -1,3 +1,10 @@
+namespace SpriteKind {
+    export const player_attack = SpriteKind.create()
+}
+// i honestly don't know why i made these numbers, string would be much easier to understand
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    nail_direction = 2
+})
 function gravitycheck () {
     if (!(theKnight.isHittingTile(CollisionDirection.Bottom))) {
         while (!(theKnight.isHittingTile(CollisionDirection.Bottom))) {
@@ -14,26 +21,101 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(100)
     gravitycheck()
 })
+// Nail slash.
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    player_NailSlash = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.player_attack)
+    player_NailSlash.setPosition(theKnight.x, theKnight.y)
+    if (nail_direction == -1) {
+        player_NailSlash.x += -10
+        animation.runImageAnimation(
+        player_NailSlash,
+        assets.animation`swordslash_2`,
+        20,
+        false
+        )
+    } else if (nail_direction == 2) {
+        player_NailSlash.y += -15
+        animation.runImageAnimation(
+        player_NailSlash,
+        assets.animation`swordslash_0`,
+        20,
+        false
+        )
+    } else if (nail_direction == -2) {
+        player_NailSlash.y += 15
+        animation.runImageAnimation(
+        player_NailSlash,
+        assets.animation`swordslash_3`,
+        20,
+        false
+        )
+    } else {
+        player_NailSlash.x += 10
+        animation.runImageAnimation(
+        player_NailSlash,
+        assets.animation`swordslash_1`,
+        20,
+        false
+        )
+    }
+    pause(500)
+    player_NailSlash.destroy()
+})
 controller.right.onEvent(ControllerButtonEvent.Repeated, function () {
+    theKnight.setImage(assets.image`the_knight`)
     gravitycheck()
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    nail_direction = -1
+})
+scene.onOverlapTile(SpriteKind.player_attack, assets.tile`fragile_wall_bluecracks`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`transparency16`)
+    music.smallCrash.play()
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    nail_direction = 1
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    nail_direction = -2
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     info.changeLifeBy(-1)
+    music.knock.play()
     spawnPlayer()
 })
+// I wish I knew an easier way to do this.
 scene.onOverlapTile(SpriteKind.Player, assets.tile`msg_flag_1`, function (sprite, location) {
     game.showLongText("Higher beings, these words are for you alone.", DialogLayout.Top)
     game.showLongText("In this land you must brave your own battles.", DialogLayout.Top)
     game.showLongText("Draw your nail without fear, and you will survive. (Press A)", DialogLayout.Top)
-    tiles.setTileAt(location, assets.tile`transparency16`)
 })
 // Benches are used as spawn points, but will not refill health unlike source material.
 function spawnPlayer () {
     tiles.placeOnRandomTile(theKnight, assets.tile`bench`)
 }
 controller.left.onEvent(ControllerButtonEvent.Repeated, function () {
+    theKnight.setImage(assets.image`the_knight0`)
     gravitycheck()
 })
+let player_NailSlash: Sprite = null
+let nail_direction = 0
 let theKnight: Sprite = null
 tiles.setCurrentTilemap(tilemap`crossroads-1`)
 theKnight = sprites.create(assets.image`the_knight`, SpriteKind.Player)
