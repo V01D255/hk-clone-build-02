@@ -29,7 +29,6 @@ function load_area (num: number) {
     tiles.setCurrentTilemap(Area_list[num])
     tiles.placeOnTile(theKnight, tiles.getTileLocation(0, 0))
     pause(100)
-    gravitycheck()
 }
 // Nail slash.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
