@@ -80,6 +80,14 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
         vengefulspirit.setKind(SpriteKind.player_attack)
     }
 })
+scene.onOverlapTile(SpriteKind.player_attack, assets.tile`lifeblood_cocoon`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`transparency16`)
+    info.changeLifeBy(1)
+    for (let index = 0; index < randint(4, 10); index++) {
+        FX = sprites.createProjectileFromSprite(assets.image`lifeblood_particle`, theKnight, randint(-100, 100), randint(-100, 100))
+        tiles.placeOnTile(FX, location)
+    }
+})
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     nail_direction = -2
 })
@@ -95,6 +103,14 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`msg_flag_1`, function (sprite
     game.showLongText("Draw your nail without fear, and you will survive. (Press A)", DialogLayout.Top)
     tiles.setTileAt(location, assets.tile`transparency16`)
 })
+scene.onOverlapTile(SpriteKind.player_attack, assets.tile`geo_cluster`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`transparency16`)
+    info.changeScoreBy(1)
+    for (let index = 0; index < randint(3, 6); index++) {
+        FX = sprites.createProjectileFromSprite(assets.image`geoparticle`, theKnight, randint(-100, 100), randint(-100, 100))
+        tiles.placeOnTile(FX, location)
+    }
+})
 // I wish I knew an easier way to do this.
 scene.onOverlapTile(SpriteKind.Player, assets.tile`msg_flag_0`, function (sprite, location) {
     game.showLongText("Higher beings, these words are for you alone.", DialogLayout.Top)
@@ -104,7 +120,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`msg_flag_0`, function (sprite
 })
 // Benches are used as spawn points, but will not refill health unlike source material.
 function spawnPlayer () {
-    tiles.placeOnRandomTile(theKnight, assets.tile`bench`)
+    tiles.placeOnTile(theKnight, respawn)
 }
 scene.onHitWall(SpriteKind.player_attack, function (sprite, location) {
     if (sprite.tileKindAt(TileDirection.Left, assets.tile`fragile_wall_bluecracks`) || sprite.tileKindAt(TileDirection.Right, assets.tile`fragile_wall_bluecracks`)) {
@@ -113,10 +129,15 @@ scene.onHitWall(SpriteKind.player_attack, function (sprite, location) {
         tiles.setWallAt(location, false)
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`bench`, function (sprite, location) {
+    respawn = location
+})
 controller.left.onEvent(ControllerButtonEvent.Repeated, function () {
     theKnight.setImage(assets.image`the_knight0`)
     gravitycheck()
 })
+let respawn: tiles.Location = null
+let FX: Sprite = null
 let vengefulspirit: Sprite = null
 let player_NailSlash: Sprite = null
 let nail_direction = 0
@@ -125,10 +146,11 @@ tiles.setCurrentTilemap(tilemap`kingspass`)
 theKnight = sprites.create(assets.image`the_knight`, SpriteKind.Player)
 info.setLife(4)
 scene.cameraFollowSprite(theKnight)
-spawnPlayer()
+tiles.placeOnTile(theKnight, tiles.getTileLocation(1, 1))
 controller.moveSprite(theKnight, 100, 0)
 game.showLongText("Higher beings, these words are for you alone.", DialogLayout.Top)
 game.showLongText("Press B to ascend to greater heights.", DialogLayout.Top)
+gravitycheck()
 // Blackout crash on any attempt to move "gravitycheck" function into here. No known workarounds. Unclear why this happens.
 game.onUpdate(function () {
 	
