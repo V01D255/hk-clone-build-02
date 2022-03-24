@@ -19,6 +19,21 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "crawlid_right"
     },
+    "image5": {
+        "data": "hwQNAA0AAAAREREREREBABEREREREQEAERERERERAQAREREREREBABEREREREQEAERERERERAQAREREREREBABEREREREQEAERERERERAQAREREREREBABEREREREQEAERERERERAQAREREREREBAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "nail_hitbox"
+    },
+    "image6": {
+        "data": "hwQQABAAAAAAAAAQAAAAAAAAABAQAAAAAAAAEBAAAAAAABAQEAAAAAAAEBARAAAAAAAQEREQAAAAABEREREAAAAAEREREQAAAAAR8R8RAAAAABHx/xEAAAAAERH/EQAAAAARERERAAAAABAREQEAAAAAEBH/AQAAAAAA8R8AAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "vengeful_spirit"
+    },
+    "image7": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAPEfAAAAAAAQEf8BAAAAABAREQEAAAAAEREREQAAAAAREf8RAAAAABHx/xEAAAAAEfEfEQAAAAARERERAAAAABEREREAAAAAEBEREAAAAAAQEBEAAAAAABAQEAAAAAAAABAQAAAAAAAAEBAAAAAAAAAQAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "vengeful_spirit0"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
