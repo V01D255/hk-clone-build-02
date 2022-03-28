@@ -69,6 +69,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "cursor"
     },
+    "image15": {
+        "data": "hwQQABAAAAAAAAAAAAAAAADdHf8AAAAAAAAd0Q0AAAAAABDxTUQAAAAAEN9URcQAAAAR3VRVDAAAEBFNVcQEAAARAVRFXAQMAACwW1VVxAAAALtVRFUMAAAAu7tEVUUAALALW1VFVQQAALBLREREAAAAsAsAAAAAAACwAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "OBESE ASPID OF DOOM"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
