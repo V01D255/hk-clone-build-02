@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const player_attack = SpriteKind.create()
+    export const NPC = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`light2`, function (sprite, location) {
     load_area(1)
@@ -29,6 +30,14 @@ function load_area (num: number) {
     tiles.setCurrentTilemap(Area_list[num])
     tiles.placeOnTile(theKnight, tiles.getTileLocation(0, 0))
     pause(100)
+    if (num == 1) {
+        game.splash("DIRTMOUTH", "The fading town")
+        Elderbug = sprites.create(assets.image`elderbug`, SpriteKind.NPC)
+        tiles.placeOnTile(Elderbug, tiles.getTileLocation(27, 38))
+    }
+    if (num == 0) {
+        game.splash("KING'S PASS")
+    }
 }
 // Nail slash.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -185,6 +194,7 @@ let Crawlid: Sprite = null
 let FX: Sprite = null
 let vengefulspirit: Sprite = null
 let player_NailSlash: Sprite = null
+let Elderbug: Sprite = null
 let nail_direction = 0
 let Area_list: tiles.TileMapData[] = []
 let theKnight: Sprite = null
@@ -195,6 +205,25 @@ info.setLife(4)
 scene.cameraFollowSprite(theKnight)
 tiles.placeOnTile(theKnight, tiles.getTileLocation(1, 1))
 controller.moveSprite(theKnight, 100, 0)
+game.setDialogTextColor(1)
+game.setDialogFrame(img`
+    1 1 1 d d d 1 1 1 d d d 1 1 1 
+    1 1 d d b b d d d b b d d 1 1 
+    1 d d b . . b b b . . b d d 1 
+    d d b d . . . . . . . d b d d 
+    d b . . b . . . . . b . . b d 
+    d b . . . . . . . . . . . b d 
+    1 d b . . . . . . . . . b d 1 
+    1 d b . . . . . . . . . b d 1 
+    1 d b . . . . . . . . . b d 1 
+    d b . . . . . . . . . . . b d 
+    d b . . b . . . . . b . . b d 
+    d d b d . . . . . . . d b d d 
+    1 d d b . . b b b . . b d d 1 
+    1 1 d d b b d d d b b d d 1 1 
+    1 1 1 d d d 1 1 1 d d d 1 1 1 
+    `)
+game.setDialogCursor(assets.image`cursor`)
 game.showLongText("Higher beings, these words are for you alone.", DialogLayout.Top)
 game.showLongText("Press B to ascend to greater heights.", DialogLayout.Top)
 Area_list = [

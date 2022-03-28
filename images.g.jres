@@ -54,6 +54,21 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "infection_particle"
     },
+    "image12": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERAAAAABAVVVVBAAAAEBVRVQEAAAAQFVFVAQAAABARVVVBAAAAEBVVVUEAAAAQFRVVAQAAAAAREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "infection_glob_large"
+    },
+    "image13": {
+        "data": "hwQQABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAMzMy8sAAAAAAAAAwMzMvLwAAAAAAAAAzMzMywsAAAAAAAAAzMy8vMzMAAAA0N3dzMzLu8wAAAAADd3bvLy8ywwAAAAAAN3by8vLzAAAAAAAC93dy7y8zMwAAAAAsNvbzMzMy8zMAAAAAAAAwMy8vAAAAAAAAAAAAMzMywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "elderbug"
+    },
+    "image14": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAAAAAAAAB0NAAAAAAAAHdEAAAAAAAAdEQ0AAAAAAB0d0QAAAAAAHd0RDQAAAAAdHdEAAAAAAB0RDQAAAAAAHdEAAAAAAAAdDQAAAAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "cursor"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
