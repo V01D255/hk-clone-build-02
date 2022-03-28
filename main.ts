@@ -3,8 +3,13 @@ namespace SpriteKind {
     export const NPC = SpriteKind.create()
 }
 sprites.onCreated(SpriteKind.Enemy, function (sprite) {
-    if (0 == 0) {
-    	
+    if (sprite == primal_aspid) {
+        while (true) {
+            pause(500)
+            for (let index = 0; index < 4; index++) {
+            	
+            }
+        }
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`light2`, function (sprite, location) {
@@ -110,23 +115,23 @@ scene.onOverlapTile(SpriteKind.player_attack, assets.tile`lifeblood_cocoon`, fun
     tiles.setTileAt(location, assets.tile`transparency16`)
     info.changeLifeBy(1)
     for (let index = 0; index < randint(4, 10); index++) {
-        FX = particle("lifeblood")
+        FX = particle("lifeblood", theKnight)
         tiles.placeOnTile(FX, location)
     }
 })
-function particle (kind: string) {
+function particle (kind: string, origin: Sprite) {
     if (kind == "lifeblood") {
-        return sprites.createProjectileFromSprite(assets.image`lifeblood_particle`, theKnight, randint(-100, 100), randint(-100, 100))
+        return sprites.createProjectileFromSprite(assets.image`lifeblood_particle`, origin, randint(-100, 100), randint(-100, 100))
     } else if (kind == "geo") {
-        return sprites.createProjectileFromSprite(assets.image`geoparticle`, theKnight, randint(-100, 100), randint(-100, 100))
+        return sprites.createProjectileFromSprite(assets.image`geoparticle`, origin, randint(-100, 100), randint(-100, 100))
     } else {
-        return sprites.createProjectileFromSprite(assets.image`infection_particle`, theKnight, randint(-100, 100), randint(-100, 100))
+        return sprites.createProjectileFromSprite(assets.image`infection_particle`, origin, randint(-100, 100), randint(-100, 100))
     }
 }
 sprites.onOverlap(SpriteKind.player_attack, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.changeScoreBy(5)
     for (let index = 0; index < randint(4, 10); index++) {
-        FX = particle("infection")
+        FX = particle("infection", otherSprite)
     }
     otherSprite.destroy()
 })
@@ -150,7 +155,7 @@ scene.onOverlapTile(SpriteKind.player_attack, assets.tile`geo_cluster`, function
     tiles.setTileAt(location, assets.tile`transparency16`)
     info.changeScoreBy(10)
     for (let index = 0; index < randint(3, 6); index++) {
-        FX = particle("geo")
+        FX = particle("geo", theKnight)
         tiles.placeOnTile(FX, location)
     }
 })
@@ -167,7 +172,7 @@ function Summon_new (x: number, y: number, enemy: string) {
     } else if (enemy == "Aspid") {
         primal_aspid = sprites.create(assets.image`OBESE ASPID OF DOOM`, SpriteKind.Enemy)
         tiles.placeOnTile(primal_aspid, tiles.getTileLocation(x, y))
-        vengefly.follow(theKnight, 15)
+        primal_aspid.follow(theKnight, 15)
     } else {
     	
     }
@@ -207,7 +212,6 @@ controller.left.onEvent(ControllerButtonEvent.Repeated, function () {
     gravitycheck()
 })
 let respawn: tiles.Location = null
-let primal_aspid: Sprite = null
 let vengefly: Sprite = null
 let Crawlid: Sprite = null
 let FX: Sprite = null
@@ -215,6 +219,7 @@ let vengefulspirit: Sprite = null
 let player_NailSlash: Sprite = null
 let Elderbug: Sprite = null
 let nail_direction = 0
+let primal_aspid: Sprite = null
 let Area_list: tiles.TileMapData[] = []
 let theKnight: Sprite = null
 tiles.setCurrentTilemap(tilemap`kingspass`)
