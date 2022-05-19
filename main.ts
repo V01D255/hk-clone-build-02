@@ -260,6 +260,7 @@ tilemap`dirtmouth1`,
 tilemap`dirtmouth1`
 ]
 gravitycheck()
+let MothwingCloak = true
 // Blackout crash on any attempt to move "gravitycheck" function into here. No known workarounds. Unclear why this happens.
 game.onUpdate(function () {
 	
