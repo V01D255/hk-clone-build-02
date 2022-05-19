@@ -51,7 +51,6 @@ function gravitycheck () {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     theKnight.vy = -120
     pause(100)
-    gravitycheck()
 })
 // Nail slash.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -96,10 +95,19 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (MothwingCloak) {
         if (nail_direction == -1) {
-        	
+            for (let index = 0; index < 4; index++) {
+                theKnight.x += 20
+            }
+            for (let index = 0; index < 2; index++) {
+                theKnight.x += 10
+            }
+            gravitycheck()
         }
         if (nail_direction == 1) {
-        	
+            for (let index = 0; index < 4; index++) {
+            	
+            }
+            gravitycheck()
         }
     }
 })
