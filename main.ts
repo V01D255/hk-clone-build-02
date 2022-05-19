@@ -93,6 +93,16 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(500)
     player_NailSlash.destroy()
 })
+controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    if (MothwingCloak) {
+        if (nail_direction == -1) {
+        	
+        }
+        if (nail_direction == 1) {
+        	
+        }
+    }
+})
 controller.right.onEvent(ControllerButtonEvent.Repeated, function () {
     theKnight.setImage(assets.image`the_knight`)
     gravitycheck()
@@ -220,6 +230,7 @@ let vengefly: Sprite = null
 let Crawlid: Sprite = null
 let nail_direction = 0
 let primal_aspid: Sprite = null
+let MothwingCloak = false
 let Area_list: tiles.TileMapData[] = []
 let theKnight: Sprite = null
 let area = 0
@@ -260,7 +271,7 @@ tilemap`dirtmouth1`,
 tilemap`dirtmouth1`
 ]
 gravitycheck()
-let MothwingCloak = true
+MothwingCloak = true
 // Blackout crash on any attempt to move "gravitycheck" function into here. No known workarounds. Unclear why this happens.
 game.onUpdate(function () {
 	
