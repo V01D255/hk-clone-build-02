@@ -13,7 +13,8 @@ sprites.onCreated(SpriteKind.Enemy, function (sprite) {
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`light2`, function (sprite, location) {
-    load_area(1)
+    area += 1
+    load_area(area)
 })
 // i honestly don't know why i made these numbers, string would be much easier to understand
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -124,6 +125,10 @@ controller.right.onEvent(ControllerButtonEvent.Repeated, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     nail_direction = -1
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`light1`, function (sprite, location) {
+    area += 1
+    load_area(area)
 })
 scene.onHitWall(SpriteKind.Enemy, function (sprite, location) {
     sprite.vx = sprite.vx * -1
@@ -249,6 +254,7 @@ let MothwingCloak = false
 let Area_list: tiles.TileMapData[] = []
 let theKnight: Sprite = null
 let area = 0
+area = 0
 tiles.setCurrentTilemap(tilemap`kingspass`)
 theKnight = sprites.create(assets.image`the_knight`, SpriteKind.Player)
 info.setLife(4)
@@ -279,7 +285,7 @@ game.showLongText("Press B to ascend to greater heights.", DialogLayout.Top)
 Area_list = [
 tilemap`kingspass`,
 tilemap`dirtmouth1`,
-tilemap`dirtmouth1`,
+tilemap`crossroads1`,
 tilemap`dirtmouth1`,
 tilemap`dirtmouth1`,
 tilemap`dirtmouth1`,
