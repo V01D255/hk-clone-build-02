@@ -93,10 +93,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(500)
     player_NailSlash.destroy()
 })
+// why does it wait until you're done moving
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (MothwingCloak) {
         if (nail_direction == -1) {
             gravitycheck()
+            theKnight.vx = -200
+            pause(200)
+            theKnight.vx = -100
+            pause(100)
+            theKnight.vx = -50
+            pause(50)
+            theKnight.vx = 0
         }
         if (nail_direction == 1) {
             theKnight.vx = 200
