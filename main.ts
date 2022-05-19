@@ -19,6 +19,24 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`light2`, function (sprite, lo
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     nail_direction = 2
 })
+// Enemy spawn and behavior scripts
+function Summon_new (x: number, y: number, enemy: string) {
+    if (enemy == "Crawlid") {
+        Crawlid = sprites.create(assets.image`crawlid_right`, SpriteKind.Enemy)
+        tiles.placeOnTile(Crawlid, tiles.getTileLocation(x, y))
+        Crawlid.setVelocity(20, 0)
+    } else if (enemy == "Vengefly") {
+        vengefly = sprites.create(assets.image`vengefly`, SpriteKind.Enemy)
+        tiles.placeOnTile(vengefly, tiles.getTileLocation(x, y))
+        vengefly.follow(theKnight, 50)
+    } else if (enemy == "Aspid") {
+        primal_aspid = sprites.create(assets.image`OBESE ASPID OF DOOM`, SpriteKind.Enemy)
+        tiles.placeOnTile(primal_aspid, tiles.getTileLocation(x, y))
+        primal_aspid.follow(theKnight, 15)
+    } else {
+    	
+    }
+}
 function gravitycheck () {
     if (!(theKnight.isHittingTile(CollisionDirection.Bottom))) {
         while (!(theKnight.isHittingTile(CollisionDirection.Bottom))) {
@@ -35,20 +53,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(100)
     gravitycheck()
 })
-// Freezes here. Don't know why.
-function load_area (num: number) {
-    tiles.setCurrentTilemap(Area_list[num])
-    tiles.placeOnTile(theKnight, tiles.getTileLocation(0, 0))
-    pause(100)
-    if (num == 1) {
-        game.splash("DIRTMOUTH", "The fading town")
-        Elderbug = sprites.create(assets.image`elderbug`, SpriteKind.NPC)
-        tiles.placeOnTile(Elderbug, tiles.getTileLocation(27, 38))
-    }
-    if (num == 0) {
-        game.splash("KING'S PASS")
-    }
-}
 // Nail slash.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     player_NailSlash = sprites.create(assets.image`nail_hitbox`, SpriteKind.player_attack)
@@ -111,6 +115,20 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
         vengefulspirit.setKind(SpriteKind.player_attack)
     }
 })
+// Freezes here. Don't know why.
+function load_area (num: number) {
+    tiles.setCurrentTilemap(Area_list[num])
+    tiles.placeOnTile(theKnight, tiles.getTileLocation(0, 0))
+    pause(100)
+    if (num == 1) {
+        game.splash("DIRTMOUTH", "The fading town")
+        Elderbug = sprites.create(assets.image`elderbug`, SpriteKind.NPC)
+        tiles.placeOnTile(Elderbug, tiles.getTileLocation(27, 38))
+    }
+    if (num == 0) {
+        game.splash("KING'S PASS")
+    }
+}
 scene.onOverlapTile(SpriteKind.player_attack, assets.tile`lifeblood_cocoon`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`transparency16`)
     info.changeLifeBy(1)
@@ -159,24 +177,6 @@ scene.onOverlapTile(SpriteKind.player_attack, assets.tile`geo_cluster`, function
         tiles.placeOnTile(FX, location)
     }
 })
-// Enemy spawn and behavior scripts
-function Summon_new (x: number, y: number, enemy: string) {
-    if (enemy == "Crawlid") {
-        Crawlid = sprites.create(assets.image`crawlid_right`, SpriteKind.Enemy)
-        tiles.placeOnTile(Crawlid, tiles.getTileLocation(x, y))
-        Crawlid.setVelocity(20, 0)
-    } else if (enemy == "Vengefly") {
-        vengefly = sprites.create(assets.image`vengefly`, SpriteKind.Enemy)
-        tiles.placeOnTile(vengefly, tiles.getTileLocation(x, y))
-        vengefly.follow(theKnight, 50)
-    } else if (enemy == "Aspid") {
-        primal_aspid = sprites.create(assets.image`OBESE ASPID OF DOOM`, SpriteKind.Enemy)
-        tiles.placeOnTile(primal_aspid, tiles.getTileLocation(x, y))
-        primal_aspid.follow(theKnight, 15)
-    } else {
-    	
-    }
-}
 // I wish I knew an easier way to do this.
 scene.onOverlapTile(SpriteKind.Player, assets.tile`msg_flag_0`, function (sprite, location) {
     game.showLongText("Higher beings, these words are for you alone.", DialogLayout.Top)
@@ -212,18 +212,18 @@ controller.left.onEvent(ControllerButtonEvent.Repeated, function () {
     gravitycheck()
 })
 let respawn: tiles.Location = null
-let vengefly: Sprite = null
-let Crawlid: Sprite = null
 let FX: Sprite = null
+let Elderbug: Sprite = null
 let vengefulspirit: Sprite = null
 let player_NailSlash: Sprite = null
-let Elderbug: Sprite = null
+let vengefly: Sprite = null
+let Crawlid: Sprite = null
 let nail_direction = 0
 let primal_aspid: Sprite = null
 let Area_list: tiles.TileMapData[] = []
 let theKnight: Sprite = null
-tiles.setCurrentTilemap(tilemap`kingspass`)
 let area = 0
+tiles.setCurrentTilemap(tilemap`kingspass`)
 theKnight = sprites.create(assets.image`the_knight`, SpriteKind.Player)
 info.setLife(4)
 scene.cameraFollowSprite(theKnight)
